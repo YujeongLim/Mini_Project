@@ -6,12 +6,12 @@
 
     <!-- selectAllMentalNames 쿼리에 대한 매핑 -->
     <select id="selectAllMentalNames" resultType="String">
-        SELECT mental_name FROM tbl_checkup
+        SELECT mental_name FROM TBL_CHECKUP
     </select>
 
     <!-- selectQuestionsByMentalName 쿼리에 대한 매핑 -->
     <select id="selectQuestionsByMentalName" resultType="String" parameterType="String">
-        SELECT cu_question FROM tbl_checkup WHERE mental_name = #{mentalName}
+        SELECT cu_question FROM TBL_CHECKUP WHERE mental_name = #{mentalName}
     </select>
 
 </mapper>

@@ -106,15 +106,14 @@
         WHERE CATE_NO = #{cateNo}
     </select>
 
-    <!-- 댓글 개수 세기-->
-    <update id="updateReplyCount" parameterType="map">
-        UPDATE TBL_COMMUNITY_AGE
-        SET REPLY_CNT = (
+    <!-- 댓글 개수 갱신 -->
+    <update id="updateReplyCount">
+        UPDATE TBL_COMMUNITY_AGE c
+        SET c.REPLY_COUNT = (
             SELECT COUNT(*)
-            FROM tbl_comm_age_comment
-            WHERE AGECOM_NO = #{ageComNo}
+            FROM TBL_COMM_AGE_COMMENT com
+            WHERE com.AGECOM_NO = c.AGECOM_NO
         )
-        WHERE AGECOM_NO = #{ageComNo}
     </update>
 
 

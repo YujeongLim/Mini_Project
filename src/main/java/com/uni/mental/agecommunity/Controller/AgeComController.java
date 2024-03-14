@@ -150,7 +150,7 @@ public class AgeComController {
 
 
     @PostMapping("/regist")
-    public String AgeComRegist(@ModelAttribute @Valid AgeComDTO ageComDTO, BindingResult result, @RequestParam("file") MultipartFile file) throws Exception {
+    public String AgeComRegist(@ModelAttribute @Valid AgeComDTO ageComDTO, @RequestParam("file") MultipartFile file) throws Exception {
 
         if (!file.isEmpty()) {
             String originalFilename = file.getOriginalFilename();
@@ -194,10 +194,7 @@ public class AgeComController {
 
 
     @PostMapping("/update")
-    public String AgeComUpdate(@ModelAttribute @Valid AgeComDTO ageComDTO, BindingResult result, @RequestParam(name = "file", required = false) MultipartFile file) throws Exception {
-        if (result.hasErrors()) {
-            return "redirect:/error";
-        }
+    public String AgeComUpdate(@ModelAttribute @Valid AgeComDTO ageComDTO, @RequestParam(name = "file", required = false) MultipartFile file) throws Exception {
         ageComService.updateAgeCom(ageComDTO, file); // 첨부파일 포함하여 업데이트
         return "redirect:/agecom/AgeComList";
     }

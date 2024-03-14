@@ -1,5 +1,6 @@
 package com.uni.mental.agecommunity.model.service;
 
+import com.uni.mental.agecommunity.model.dto.AgeCmtDTO;
 import com.uni.mental.agecommunity.model.dto.AgeComDTO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,4 +33,7 @@ public interface AgeComService {
 
     void updateReplyCount(int ageComNo);
 
+    void createComment(AgeCmtDTO comment);
+
+    void deleteComment(int ageCmtNo, int ageComNo);
 }

@@ -31,4 +31,5 @@ public interface AgeComDAO {
     int getTotalCountByCateNo(@Param("cateNo") int cateNo);
 
     void updateReplyCount(int ageComNo);
+
 }

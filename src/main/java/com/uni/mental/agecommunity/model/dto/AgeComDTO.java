@@ -16,10 +16,10 @@ public class AgeComDTO {
 
     private String attachNewname;
 
-    private int replycnt;
+    private Integer replycnt;
 
 
-    public AgeComDTO(Integer ageComNo, int cateNo, String ageComTitle, String ageComDetail, String memberNick, Date ageComDate, Integer ageComViews, String attachNewname, int replycnt) {
+    public AgeComDTO(Integer ageComNo, int cateNo, String ageComTitle, String ageComDetail, String memberNick, Date ageComDate, Integer ageComViews, String attachNewname, Integer replycnt) {
         this.ageComNo = ageComNo;
         this.cateNo = cateNo;
         this.ageComTitle = ageComTitle;
@@ -95,11 +95,11 @@ public class AgeComDTO {
         this.attachNewname = attachNewname;
     }
 
-    public int getReplycnt() {
+    public Integer getReplycnt() {
         return replycnt;
     }
 
-    public void setReplycnt(int replycnt) {
+    public void setReplycnt(Integer replycnt) {
         this.replycnt = replycnt;
     }
     @Override

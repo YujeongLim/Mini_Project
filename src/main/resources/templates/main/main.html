@@ -45,7 +45,7 @@
                 <div class="con1_2">
                     <div class="w50_con">
                         <div class="w50">
-                            <a href="#">
+                            <a href="/mental/info">
                                 <div class="w50_p">
                                     <p>정신건강</p>
                                     <p>정보</p>
@@ -55,14 +55,14 @@
                         </div>
                         <div class="w50_submenu">
                             <img src="/img/submenu_icon1.png">
-                            <a href="">
+                            <a href="/mental/info">
                                 정신건강 질환별 정보
                             </a>
                         </div>
                     </div>
                     <div class="w50_con">
                         <div class="w50">
-                            <a href="">
+                            <a href="/checkup/checkup">
                                 <div class="w50p">
                                     <div class="w50_p">
                                         <p>질환별</p>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="w50_submenu">
                             <img src="/img/submenu_icon2.png">
-                            <a href="">
+                            <a href="/news/news_list">
                                 정신건강 관련 정보
                             </a>
                         </div>
@@ -95,13 +95,13 @@
             <div class="content2 box2">
                 <ul class="flex_box clearfix">
                     <li class="con2">
-                        <a href="">
+                        <a href="/news/news_list">
                             <img src="/img/card1.png">
                             <p>카드뉴스</p>
                         </a>
                     </li>
                     <li class="con2">
-                        <a href="">
+                        <a href="/video/video_list">
                             <img src="/img/card2.png">
                             <p>동영상</p>
                         </a>
@@ -113,7 +113,7 @@
                         </a>
                     </li>
                     <li class="con2">
-                        <a href="">
+                        <a href="/news/news_list">
                             <img src="/img/card4.png">
                             <p>도움이 되는 정보</p> 
                         </a>
@@ -139,14 +139,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <th:block th:each="post, status : ${posts}">
-                            <tr th:if="${status.count <= 10}">
-                                <td th:text="${post.cateName}"></td>
-                                <td th:text="${post.ageComTitle}"></td>
-                                <td th:text="${post.memberNick}"></td>
-                                <td th:text="${post.ageComViews}"></td>
-                            </tr>
-                        </th:block>
+                    <th:block th:each="post, status : ${posts}">
+                        <tr th:if="${status.count <= 10}">
+                            <td th:text="${post.cateName}"></td>
+                            <td>
+                                <div th:switch="${post.cateName}">
+                                    <a th:case="'연령'" th:href="@{/agecom/AgeComDetailView/{no}(no=${post.ageComNo})}" th:text="${post.ageComTitle}"></a>
+                                    <a th:case="'질환'" th:href="@{/mencom/mental_detail/{no}(no=${post.ageComNo})}" th:text="${post.ageComTitle}"></a>
+                                    <a th:case="'지역'" th:href="@{/recom/recomdetailview/{no}(no=${post.ageComNo})}" th:text="${post.ageComTitle}"></a>
+                                </div>
+                            </td>
+                            <td th:text="${post.memberNick}"></td>
+                            <td th:text="${post.ageComViews}"></td>
+                        </tr>
+                    </th:block>
                     </tbody>
                 </table>
             </div>
@@ -167,7 +173,9 @@
                 </div>
                 <div class="clearfix flex">
                     <ul class="s3_list">
-                        <li th:each="notice : ${notices}" th:text="${notice.title}"></li>
+                        <li th:each="notice : ${notices}">
+                            <a th:href="@{/notice/noticeBoardDetailView(no=${notice.no})}" th:text="${notice.title}"></a>
+                        </li>
                     </ul>
                     <ul class="s3_list" style="text-align: right;">
                         <li th:each="notice : ${notices}" th:text="${#dates.format(notice.date, 'yyyy.MM.dd')}"></li>

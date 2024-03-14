@@ -34,6 +34,7 @@ public class AgeCmtController {
             String memberNick = authentication.getName();
             comment.setMemberNick(memberNick);
             ageCmtService.addComment(comment);
+            ageComService.createComment(comment);
             return "redirect:/agecom/AgeComDetailView/" + comment.getAgeComNo();
         } else {
             return "redirect:/login";
@@ -46,6 +47,7 @@ public class AgeCmtController {
     @PostMapping("/deleteComment")
     public String deleteComment(@RequestParam("ageCmtNo") int ageCmtNo, @RequestParam("ageComNo") int ageComNo) {
         ageCmtService.removeComment(ageCmtNo);
+        ageComService.deleteComment(ageCmtNo, ageComNo);
         return "redirect:/agecom/AgeComDetailView/" + ageComNo; // 삭제 후 댓글이 속한 게시글 상세 페이지로 리다이렉트
     }
 

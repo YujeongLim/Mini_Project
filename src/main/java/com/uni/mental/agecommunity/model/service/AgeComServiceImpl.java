@@ -1,6 +1,7 @@
 package com.uni.mental.agecommunity.model.service;
 
 import com.uni.mental.agecommunity.model.dao.AgeComDAO;
+import com.uni.mental.agecommunity.model.dto.AgeCmtDTO;
 import com.uni.mental.agecommunity.model.dto.AgeComDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -103,5 +104,17 @@ public class AgeComServiceImpl implements AgeComService {
     @Override
     public void updateReplyCount(int ageComNo) {
         ageComDAO.updateReplyCount(ageComNo);
+    }
+
+    // Add a method to handle the creation of a comment.
+    public void createComment(AgeCmtDTO ageCmtDTO) {
+        // ... logic to save comment
+        updateReplyCount(ageCmtDTO.getAgeComNo());
+    }
+
+    // Add a method to handle the deletion of a comment.
+    public void deleteComment(int commentId, int ageComNo) {
+        // ... logic to delete comment by commentId
+        updateReplyCount(ageComNo);
     }
 }

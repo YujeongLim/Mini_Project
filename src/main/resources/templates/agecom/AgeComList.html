@@ -17,11 +17,11 @@
 <ul class="menu_age">
     <li><p style="background: #5093ca; color: #fff">커뮤니티</p></li>
     <li>
-        <button style="margin-right: 100px" onclick="location.href='mental_list'">지역별</button>
+        <button style="margin-right: 100px" onclick="location.href='/recom/recomlist'">지역별</button>
 
-        <button onclick="location.href='mental_list'">연령별</button>
+        <button onclick="location.href='/agecom/AgeComList'">연령별</button>
 
-        <button style="margin-left: 100px" onclick="location.href='mental_list'">질환별</button>
+        <button style="margin-left: 100px" onclick="location.href='/mencom/mental_list'">질환별</button>
     </li>
 
     <li>
@@ -66,8 +66,10 @@
         </div>
         <div class="btn">
             <button type="submit" id="btn1">
-                <img src="/img/writer.png" style="width: 20px; height: 20px; margin-right: 2px" alt="글쓰기" onclick="location.href='AgeComEnrollForm'"/>
-                글쓰기
+                <a onclick="location.href='AgeComEnrollForm'">
+                    <img src="/img/writer.png" style="width: 20px; height: 20px; margin-right: 2px" alt="글쓰기"/>
+                    글쓰기
+                </a>
             </button>
         </div>
         <table>
