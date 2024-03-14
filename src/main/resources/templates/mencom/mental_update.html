@@ -18,23 +18,35 @@
             text-decoration:none;
             font-size:14px;
         }
-
         .menu {
             width: 100%;
             overflow: hidden;
-            margin-top: 250px;
+            margin-top: 130px;
         }
 
         .menu > li {
-            width: 25%; /*20*5=100%*/
+            width: 100%;
             float: left;
             text-align: center;
             line-height: 40px;
-            background-color: lightgray;
-        }
+            background-color: #5093ca;
 
+        }
+        .menu > li button{
+            color: #fff;
+            background: none;
+        }
         .menu a {
             color: black;
+        }
+        .menu p{
+            width: 100%;
+            float: left;
+            text-align: center;
+            line-height: 40px;
+            background-color: #5093ca;
+            color: white;
+            font-size: 13px;
         }
         .card{
             width:70%;
@@ -115,20 +127,25 @@
 <body>
 <div th:replace="common/header :: header"></div>
 <header class="header">
-    <ul class="menu">
-        <li>
-            <a onclick="location.href='mentalList'">홈</a>
-        </li>
-        <li>
-            <a onclick="location.href='mentalList'">지역별</a>
-        </li>
-        <li>
-            <a onclick="location.href='mentalList'">연령별</a>
-        </li>
-        <li>
-            <a onclick="location.href='mentalList'">질환별</a>
-        </li>
-    </ul>
+
+    <div class="menu">
+
+
+        <ul class="menu">
+            <p>커뮤니티</p>
+            <li>
+                <button style="margin-right: 100px" onclick="location.href='mental_list'">지역별</button>
+
+                <button onclick="location.href='mental_list'">연령별</button>
+
+                <button style="margin-left: 100px" onclick="location.href='mental_list'">질환별</button>
+            </li>
+
+            <li>
+                <button  onclick="location.href='mental_list'">채팅</button>
+            </li>
+        </ul>
+    </div>
 </header>
 <div class="card">
     <h1>게시글 수정하기</h1>

@@ -26,22 +26,24 @@ public class NewsController {
         SyndFeedInput input = new SyndFeedInput();
         SyndFeed feed = input.build(new XmlReader(feedSource));
         List<SyndEntry> entries = feed.getEntries();
+        List<SyndEntry> limitedEntries = entries.stream().limit(15).toList();
 
-        model.addAttribute("entries", entries);
+        model.addAttribute("entries", limitedEntries);
 
         URL feedSource1 = new URL("https://api.newswire.co.kr/rss/industry/1005");
         SyndFeedInput input1 = new SyndFeedInput();
         SyndFeed feed1 = input1.build(new XmlReader(feedSource1));
         List<SyndEntry> entries1 = feed1.getEntries();
+        List<SyndEntry> limitedEntries1 = entries1.stream().limit(11).toList();
 
-        model.addAttribute("entries1", entries1);
+        model.addAttribute("entries1", limitedEntries1);
 
         URL feedSource2 = new URL("https://rss.blog.naver.com/ncmh0301.xml");
         SyndFeedInput input2 = new SyndFeedInput();
         SyndFeed feed2 = input2.build(new XmlReader(feedSource2));
         List<SyndEntry> entries2 = feed2.getEntries();
         List<SyndEntry> limitedEntries2 = entries2.stream().limit(30).toList();
-        model.addAttribute("entries2", entries2);
+        model.addAttribute("entries2", limitedEntries2);
     }
 
 }

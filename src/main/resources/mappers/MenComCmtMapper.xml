@@ -35,30 +35,30 @@
         ,A.mencmt_content as content
         ,A.mencmt_date as date
         ,C.member_nick as nick
-        from tbl_mental_reply A
-            left join tbl_mental B on(B.men_no = A.men_no)
-            left join tbl_member C on(A.member_id = C.member_id)
+        from TBL_MENTAL_REPLY A
+            left join TBL_MENTAL B on(B.men_no = A.men_no)
+            left join TBL_MEMBER C on(A.member_id = C.member_id)
         where A.men_no = #{menNo}
         order by A.mencmt_no desc
     </select>
 
     <insert id="insertComment" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComCmtDTO">
-            insert into tbl_mental_reply(member_id, men_no, mencmt_content, mencmt_date)
+            insert into TBL_MENTAL_REPLY(member_id, men_no, mencmt_content, mencmt_date)
             values(#{id},#{menNo},#{content},now())
     </insert>
 
     <delete id="deleteComment" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComCmtDTO">
 
             delete
-            from tbl_mental_reply
+            from TBL_MENTAL_REPLY
             where mencmt_no = #{no}
 
     </delete>
     <update id="updateReplyCnt" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComCmtDTO">
 
-        UPDATE tbl_mental
+        UPDATE TBL_MENTAL
         SET replyCnt = replyCnt + #{amount}
-        where tbl_mental.men_no = #{no}
+        where TBL_MENTAL.men_no = #{no}
 
     </update>
 </mapper>

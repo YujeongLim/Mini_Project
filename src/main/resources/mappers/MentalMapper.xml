@@ -52,15 +52,15 @@
         A.men_image,
         A.replyCnt,
         C.cate_name2
-    from tbl_mental A
-    left join tbl_member B on(A.member_id = B.member_id)
+    from TBL_MENTAL A
+    left join TBL_MEMBER B on(A.member_id = B.member_id)
     LEFT JOIN TBL_CATE C ON (A.cate_no = C.cate_no)
     where men_no = #{no}
 
 </select>
 
     <insert id="registMenCom" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComDTO">
-        insert into tbl_mental(member_id,men_title, men_content, men_date, cate_no, men_views,men_image)
+        insert into TBL_MENTAL(member_id,men_title, men_content, men_date, cate_no, men_views,men_image)
         values (#{id},#{title},#{content},NOW(),#{cate}, DEFAULT,#{image})
     </insert>
 
@@ -75,7 +75,7 @@
                B.member_nick,
                A.men_image,
                A.replyCnt
-        FROM tbl_mental A
+        FROM TBL_MENTAL A
         LEFT JOIN TBL_MEMBER B ON (A.MEMBER_ID = B.MEMBER_ID)
         where A.cate_no = #{cate}
         ORDER BY A.men_no DESC
@@ -88,7 +88,7 @@
 
             select
                 men_Image
-            from tbl_mental
+            from TBL_MENTAL
             where men_no = #{no}
 
     </select>
@@ -96,8 +96,8 @@
         SELECT A.men_no, A.member_id, A.men_title, A.men_content, A.men_views, A.cate_no, A.men_date,B.member_nick,
                A.men_image,
                A.replyCnt
-        FROM tbl_mental A
-                 LEFT JOIN tbl_member B ON (A.member_id = B.member_id)
+        FROM TBL_MENTAL A
+                 LEFT JOIN TBL_MEMBER B ON (A.member_id = B.member_id)
         ORDER BY A.men_no DESC
 
     </select>
@@ -105,7 +105,7 @@
 
 
     <update id="updateMencom" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComDTO">
-        update TBL_mental
+        update TBL_MENTAL
         set
             men_title=#{title}, men_content=#{content}, men_image = #{image}
         where men_no = #{no}
@@ -114,13 +114,13 @@
     <delete id="deleteMencom" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComDTO">
 
         delete
-        from tbl_mental
+        from TBL_MENTAL
         where men_no = #{no}
 
     </delete>
 
 <update id="updateViews" parameterType="com.uni.mental.mentalcomunity.model.dto.MenComDTO">
-        update tbl_mental
+        update TBL_MENTAL
         set
             men_views = men_views +1
         where men_no = #{no}

@@ -21,13 +21,13 @@
 
         select
                 *
-        from tbl_video
+        from TBL_VIDEO
         order by video_no desc
     </select>
 
     <insert id="registVideo" parameterType="com.uni.mental.video.model.dto.VideoDTO">
 
-        insert into  tbl_video (video_title, video_content,video_date,video_link,video_thumbnail)
+        insert into  TBL_VIDEO (video_title, video_content,video_date,video_link,video_thumbnail)
         values (#{title},#{content},now(),#{link},#{thumbnail})
 
     </insert>
@@ -36,14 +36,14 @@
 
         select
             *
-        from tbl_video
+        from TBL_VIDEO
         where video_no = #{no}
 
     </select>
 
     <delete id="deleteVideo"  parameterType="com.uni.mental.video.model.dto.VideoDTO">
         delete
-        from tbl_video
+        from TBL_VIDEO
         where video_no = #{no}
 
     </delete>

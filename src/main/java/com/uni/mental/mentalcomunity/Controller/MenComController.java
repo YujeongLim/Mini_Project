@@ -37,18 +37,17 @@ public class MenComController {
 
     @GetMapping("mental_list")
     public void MentalList(Model model,
-                            @RequestParam(name="cate",required = false ) Integer cate) {
+                           @RequestParam(name="cate",required = false ) Integer cate) {
         List<MenComDTO> mentalList;
 
         if (cate != null) {
             // CATENO따라서 리스트 나오기
             mentalList = menComService.findAllCate(cate);
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@"+mentalList);
+
         } else {
             mentalList = menComService.findAllView();
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+mentalList);
-        }
 
+        }
         model.addAttribute("cate", cate);
         model.addAttribute("mentalList", mentalList);
     }
@@ -68,7 +67,7 @@ public class MenComController {
     }
     @GetMapping("mental_detail")
     public ModelAndView MentalDetail(@RequestParam("no") String no, ModelAndView mv
-                                         ){
+    ){
         MenComDTO mental = menComService.selectOne(Integer.parseInt(no));
         int updateViews = menComService.updateViews(Integer.parseInt(no));
 
@@ -85,17 +84,14 @@ public class MenComController {
         return mv;
     }
 
-    @PostMapping(value = "regist",produces = MediaType.IMAGE_PNG_VALUE)
-    public ModelAndView MentalRegist(@RequestParam(value = "image",required = false) MultipartFile uploadFile,
+    @PostMapping(value = "regist", produces = MediaType.IMAGE_PNG_VALUE)
+    public ModelAndView MentalRegist(@RequestParam(value = "image", required = false) MultipartFile uploadFile,
                                      @ModelAttribute @Validated MenComDTO menCom,
-                                     BindingResult bindingResult
-                                    ) {
-
-        System.out.println(uploadFile);
+                                     BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
         try {
-           
+            // 이미지를 첨부한 경우에만 처리
             if (uploadFile != null && !uploadFile.isEmpty()) {
                 String imageFileName = UUID.randomUUID().toString() + "_" + uploadFile.getOriginalFilename();
                 String uploadDir = resourceLoader.getResource("classpath:/static/image").getFile().getAbsolutePath();
@@ -103,25 +99,18 @@ public class MenComController {
                 uploadFile.transferTo(file);
 
                 menCom.setImage(imageFileName);
-                System.out.println(imageFileName);
-                System.out.println(uploadDir);
-
-
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                String id = authentication.getName();
-                menCom.setId(id);
-
-
-
-                int result = menComService.registMenCom(menCom);
-
-                if (result > 0) {
-                    modelAndView.setViewName("redirect:/mencom/mental_list");
-                    modelAndView.addObject("message", "등록 성공");
-                } else {
-                    modelAndView.setViewName("error");
-                    modelAndView.addObject("error", "등록 실패");
-                }
+            }
+            // 로그인한 사용자의 아이디 설정
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String id = authentication.getName();
+            menCom.setId(id);
+            int result = menComService.registMenCom(menCom);
+            if (result > 0) {
+                modelAndView.setViewName("redirect:/mencom/mental_list");
+                modelAndView.addObject("message", "등록 성공");
+            } else {
+                modelAndView.setViewName("error");
+                modelAndView.addObject("error", "등록 실패");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,9 +119,11 @@ public class MenComController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
         return modelAndView;
     }
+
+
+
 
 
     @PostMapping(value = "update", produces = MediaType.IMAGE_PNG_VALUE)
@@ -187,11 +178,11 @@ public class MenComController {
 
 
     @PostMapping("delete")
-public String MentalDelete(@RequestParam("no") int no){
-    menComService.deleteMencom(no);
+    public String MentalDelete(@RequestParam("no") int no){
+        menComService.deleteMencom(no);
 
-    return "redirect:/mencom/mental_list";
-}
+        return "redirect:/mencom/mental_list";
+    }
 
 
 
