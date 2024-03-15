@@ -81,7 +81,7 @@
 
     <select id="getEmailById" resultType="java.lang.String">
         SELECT member_email
-        FROM tbl_member
+        FROM TBL_MEMBER
         WHERE member_id = #{memberId}
     </select>
 

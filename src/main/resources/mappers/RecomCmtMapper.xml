@@ -35,20 +35,20 @@
         ,A.RECMT_CONTENT as content
         ,A.RECMT_DATE as recmtdate
         ,C.MEMBER_NICK as membernick
-        from tbl_recmt A
-            left join tbl_recom B on(B.RECOM_NO = A.RECOM_NO)
-            left join tbl_member C on(A.member_id = C.member_id)
+        from TBL_RECMT A
+            left join TBL_RECOM B on(B.RECOM_NO = A.RECOM_NO)
+            left join TBL_MEMBER C on(A.member_id = C.member_id)
         where A.RECOM_NO = #{recomno}
         order by A.RECOM_NO desc
     </select>
 
     <insert id="insertRecmt" parameterType="com.uni.mental.regioncomunity.model.dto.RecomCmtDto">
-        insert into tbl_recmt(member_id, RECOM_NO, RECMT_CONTENT, RECMT_DATE)
+        insert into TBL_RECMT(member_id, RECOM_NO, RECMT_CONTENT, RECMT_DATE)
         values(#{memberid},#{recomno},#{content},now())
     </insert>
 
     <delete id="deleteRecmt" parameterType="int">
-        DELETE FROM tbl_recmt WHERE RECMT_NO = #{recmtno}
+        DELETE FROM TBL_RECMT WHERE RECMT_NO = #{recmtno}
     </delete>
 
     <update id="updateReplyCnt" parameterType="com.uni.mental.regioncomunity.model.dto.RecomCmtDto">
